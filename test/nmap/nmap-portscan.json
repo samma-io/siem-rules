@@ -1,0 +1,13 @@
+{
+  "type": "nmap",
+  "scanner": "nmap_port",
+  "protocol": "tcp",
+  "port": "80",
+  "target": "hellohippo.com",
+  "samma-io": {
+    "id": "g23dE222",
+    "scanner": "domain",
+    "tags": "['scanner','prod']",
+    "json": "{\"extra\":\"value\"}"
+  }
+}

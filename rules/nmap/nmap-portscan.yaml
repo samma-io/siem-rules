@@ -1,0 +1,24 @@
+name: nmap-open-port
+description: Matches nmap port scan results for open TCP ports
+severity: medium
+nats_subject: samma.alerts.nmap.port
+
+compliance:
+  pci_dss:
+    - "11.4"
+  nist_800_53:
+    - "SI.4"
+  mitre:
+    - "T1046"
+  tsc:
+    - "CC6.1"
+    - "CC7.2"
+
+match:
+  and:
+    - field: type
+      equals: nmap
+    - field: scanner
+      equals: nmap_port
+    - field: protocol
+      equals: tcp

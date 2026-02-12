@@ -1,0 +1,34 @@
+name: k8s-user-login
+description: Alerts on Kubernetes user authentication events
+severity: medium
+nats_subject: samma.alerts.k8s.user_login
+
+compliance:
+  pci_dss:
+    - "10.2.5"
+  gdpr:
+    - "IV_35.7.d"
+    - "IV_32.2"
+  hipaa:
+    - "164.312.b"
+  nist_800_53:
+    - "AU.14"
+    - "AC.7"
+  mitre:
+    - "T1078"
+  tsc:
+    - "CC6.1"
+    - "CC6.8"
+    - "CC7.2"
+    - "CC7.3"
+  gpg13:
+    - "7.1"
+
+match:
+  and:
+    - field: kind
+      equals: Event
+    - field: objectRef.resource
+      equals: users
+    - field: verb
+      equals: authenticate

@@ -1,0 +1,45 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Validate rules
+        run: python test_rules.py
+
+  release:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
+
+      - name: Package rules
+        run: tar -czf "siem-rules-${{ steps.version.outputs.VERSION }}.tar.gz" rules/
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "SIEM Rules ${{ steps.version.outputs.VERSION }}"
+          generate_release_notes: true
+          files: siem-rules-${{ steps.version.outputs.VERSION }}.tar.gz

@@ -1,0 +1,23 @@
+name: nikto-critical-finding
+description: Matches Nikto findings with known OSVDB vulnerabilities
+severity: high
+nats_subject: samma.alerts.nikto.critical
+
+compliance:
+  pci_dss:
+    - "6.5"
+    - "11.4"
+  nist_800_53:
+    - "SI.4"
+  mitre:
+    - "T1190"
+  tsc:
+    - "CC6.1"
+    - "CC7.2"
+
+match:
+  and:
+    - field: type
+      equals: Nikto
+    - field: OSVDB
+      regex: "^OSVDB-[1-9]"

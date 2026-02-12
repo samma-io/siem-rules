@@ -1,0 +1,26 @@
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "a]1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "stage": "ResponseComplete",
+  "requestURI": "/apis/authentication.k8s.io/v1/tokenreviews",
+  "verb": "authenticate",
+  "user": {
+    "username": "system:serviceaccount:kube-system:default",
+    "uid": "12345-abcde",
+    "groups": ["system:serviceaccounts", "system:authenticated"]
+  },
+  "sourceIPs": ["10.0.0.1"],
+  "objectRef": {
+    "resource": "users",
+    "apiGroup": "authentication.k8s.io",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 200
+  },
+  "requestReceivedTimestamp": "2026-02-10T12:00:00.000000Z",
+  "stageTimestamp": "2026-02-10T12:00:00.100000Z"
+}

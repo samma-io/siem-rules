@@ -1,0 +1,17 @@
+{
+  "type": "Nikto",
+  "OSVDB": "OSVDB-3092",
+  "finding": "The anti-clickjacking X-Frame-Options header is not present.",
+  "host": "hellohippo.com",
+  "ip": "172.66.136.64",
+  "nikto_url": "/",
+  "port": "443",
+  "request": "GET",
+  "target": "hellohippo.com",
+  "samma-io": {
+    "id": "g23dE222",
+    "scanner": "domain",
+    "tags": "['scanner','prod']",
+    "json": "{\"extra\":\"value\"}"
+  }
+}
