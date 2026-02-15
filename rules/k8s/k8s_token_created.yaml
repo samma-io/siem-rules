@@ -1,0 +1,36 @@
+name: k8s-token-created
+description: Detects service account token generation requests - may indicate credential theft or unauthorized access attempts
+severity: high
+nats_subject: samma.alerts.k8s.token_created
+
+compliance:
+  pci_dss:
+    - "10.2.5"
+    - "8.1.2"
+  gdpr:
+    - "IV_35.7.d"
+  hipaa:
+    - "164.312.d"
+  nist_800_53:
+    - "AC.2"
+    - "IA.5"
+    - "AU.14"
+  mitre:
+    - "T1528"
+    - "T1078.004"
+  tsc:
+    - "CC6.1"
+    - "CC6.8"
+  gpg13:
+    - "7.1"
+
+match:
+  and:
+    - field: kind
+      equals: Event
+    - field: objectRef.resource
+      equals: serviceaccounts
+    - field: objectRef.subresource
+      equals: token
+    - field: verb
+      equals: create

@@ -1,0 +1,35 @@
+name: k8s-impersonation
+description: Detects user impersonation requests (--as flag) which bypass normal authentication to act as another identity
+severity: critical
+nats_subject: samma.alerts.k8s.impersonation
+
+compliance:
+  pci_dss:
+    - "10.2.2"
+    - "10.2.5"
+    - "8.1.2"
+  gdpr:
+    - "IV_35.7.d"
+  hipaa:
+    - "164.312.a"
+    - "164.312.d"
+  nist_800_53:
+    - "AC.2"
+    - "AC.3"
+    - "AU.14"
+  mitre:
+    - "T1078"
+  tsc:
+    - "CC6.1"
+    - "CC6.8"
+    - "CC7.2"
+  gpg13:
+    - "7.1"
+    - "7.2"
+
+match:
+  and:
+    - field: kind
+      equals: Event
+    - field: verb
+      equals: impersonate

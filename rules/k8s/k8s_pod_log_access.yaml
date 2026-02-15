@@ -1,0 +1,28 @@
+name: k8s-pod-log-access
+description: Detects access to pod logs via API - may indicate reconnaissance to extract sensitive data from application output
+severity: low
+nats_subject: samma.alerts.k8s.pod_log_access
+
+compliance:
+  pci_dss:
+    - "10.2.1"
+  nist_800_53:
+    - "AU.12"
+    - "AU.14"
+  mitre:
+    - "T1613"
+  tsc:
+    - "CC7.2"
+  gpg13:
+    - "7.1"
+
+match:
+  and:
+    - field: kind
+      equals: Event
+    - field: objectRef.resource
+      equals: pods
+    - field: objectRef.subresource
+      equals: log
+    - field: verb
+      equals: get

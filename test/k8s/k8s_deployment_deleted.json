@@ -1,0 +1,27 @@
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "a9b0c1d2-e3f4-5678-abcd-789abcdef012",
+  "stage": "ResponseComplete",
+  "requestURI": "/apis/apps/v1/namespaces/production/deployments/web-frontend",
+  "verb": "delete",
+  "user": {
+    "username": "admin@example.com",
+    "groups": ["system:masters", "system:authenticated"]
+  },
+  "sourceIPs": ["10.0.1.10"],
+  "objectRef": {
+    "resource": "deployments",
+    "namespace": "production",
+    "name": "web-frontend",
+    "apiGroup": "apps",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 200
+  },
+  "requestReceivedTimestamp": "2026-02-10T23:30:00.000000Z",
+  "stageTimestamp": "2026-02-10T23:30:00.100000Z"
+}

@@ -1,0 +1,48 @@
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "RequestResponse",
+  "auditID": "c1d2e3f4-a5b6-7890-cdef-9abcdef01234",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/pods",
+  "verb": "create",
+  "user": {
+    "username": "developer@example.com",
+    "groups": ["system:authenticated"]
+  },
+  "sourceIPs": ["10.0.1.50"],
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "debug-pod",
+    "apiVersion": "v1"
+  },
+  "requestObject": {
+    "kind": "Pod",
+    "apiVersion": "v1",
+    "metadata": {
+      "name": "debug-pod",
+      "namespace": "default"
+    },
+    "spec": {
+      "hostNetwork": true,
+      "hostPID": true,
+      "hostIPC": false,
+      "containers": [
+        {
+          "name": "debug",
+          "image": "ubuntu:latest",
+          "securityContext": {
+            "privileged": true
+          }
+        }
+      ]
+    }
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 201
+  },
+  "requestReceivedTimestamp": "2026-02-11T00:30:00.000000Z",
+  "stageTimestamp": "2026-02-11T00:30:00.100000Z"
+}

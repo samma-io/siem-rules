@@ -1,0 +1,27 @@
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "RequestResponse",
+  "auditID": "e3f4a5b6-c7d8-9012-efab-bcdef0123456",
+  "stage": "ResponseComplete",
+  "requestURI": "/apis/networking.k8s.io/v1/namespaces/production/networkpolicies/deny-all",
+  "verb": "delete",
+  "user": {
+    "username": "attacker@example.com",
+    "groups": ["system:authenticated"]
+  },
+  "sourceIPs": ["10.0.5.99"],
+  "objectRef": {
+    "resource": "networkpolicies",
+    "namespace": "production",
+    "name": "deny-all",
+    "apiGroup": "networking.k8s.io",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 200
+  },
+  "requestReceivedTimestamp": "2026-02-11T01:30:00.000000Z",
+  "stageTimestamp": "2026-02-11T01:30:00.100000Z"
+}

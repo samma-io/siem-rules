@@ -1,0 +1,40 @@
+name: k8s-rbac-modified
+description: Detects modification of RBAC roles or cluster roles - may indicate privilege escalation or account manipulation
+severity: high
+nats_subject: samma.alerts.k8s.rbac_modified
+
+compliance:
+  pci_dss:
+    - "10.2.2"
+    - "10.2.5"
+    - "7.1.2"
+  gdpr:
+    - "IV_35.7.d"
+  hipaa:
+    - "164.312.a"
+  nist_800_53:
+    - "AC.2"
+    - "AC.6"
+    - "AU.14"
+  mitre:
+    - "T1098"
+  tsc:
+    - "CC6.1"
+    - "CC6.3"
+  gpg13:
+    - "7.1"
+
+match:
+  and:
+    - field: kind
+      equals: Event
+    - or:
+        - field: verb
+          equals: update
+        - field: verb
+          equals: patch
+    - or:
+        - field: objectRef.resource
+          equals: clusterroles
+        - field: objectRef.resource
+          equals: roles

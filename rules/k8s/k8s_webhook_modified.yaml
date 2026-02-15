@@ -1,0 +1,38 @@
+name: k8s-webhook-modified
+description: Detects creation or modification of admission webhooks - can be used to intercept and mutate all cluster operations
+severity: critical
+nats_subject: samma.alerts.k8s.webhook_modified
+
+compliance:
+  pci_dss:
+    - "10.2.2"
+    - "11.5"
+  nist_800_53:
+    - "SI.4"
+    - "CM.3"
+    - "AU.14"
+  mitre:
+    - "T1525"
+  tsc:
+    - "CC7.2"
+    - "CC8.1"
+  gpg13:
+    - "7.1"
+    - "7.2"
+
+match:
+  and:
+    - field: kind
+      equals: Event
+    - or:
+        - field: verb
+          equals: create
+        - field: verb
+          equals: update
+        - field: verb
+          equals: patch
+    - or:
+        - field: objectRef.resource
+          equals: mutatingwebhookconfigurations
+        - field: objectRef.resource
+          equals: validatingwebhookconfigurations

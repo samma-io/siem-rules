@@ -1,0 +1,31 @@
+name: k8s-namespace-deleted
+description: Detects deletion of Kubernetes namespaces - potential data destruction or service disruption
+severity: critical
+nats_subject: samma.alerts.k8s.namespace_deleted
+
+compliance:
+  pci_dss:
+    - "10.2.2"
+    - "10.2.7"
+  nist_800_53:
+    - "AU.14"
+    - "CP.10"
+    - "IR.6"
+  mitre:
+    - "T1485"
+  tsc:
+    - "CC7.2"
+    - "CC7.3"
+    - "A1.2"
+  gpg13:
+    - "7.1"
+    - "7.2"
+
+match:
+  and:
+    - field: kind
+      equals: Event
+    - field: objectRef.resource
+      equals: namespaces
+    - field: verb
+      equals: delete

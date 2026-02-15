@@ -1,0 +1,27 @@
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "RequestResponse",
+  "auditID": "d2e3f4a5-b6c7-8901-defa-abcdef012345",
+  "stage": "ResponseComplete",
+  "requestURI": "/apis/apps/v1/namespaces/default/deployments/web-app",
+  "verb": "patch",
+  "user": {
+    "username": "attacker@example.com",
+    "groups": ["system:authenticated"]
+  },
+  "sourceIPs": ["10.0.5.99"],
+  "objectRef": {
+    "resource": "deployments",
+    "namespace": "default",
+    "name": "web-app",
+    "apiGroup": "apps",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 200
+  },
+  "requestReceivedTimestamp": "2026-02-11T01:00:00.000000Z",
+  "stageTimestamp": "2026-02-11T01:00:00.100000Z"
+}

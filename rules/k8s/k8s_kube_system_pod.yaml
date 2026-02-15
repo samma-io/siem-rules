@@ -1,0 +1,31 @@
+name: k8s-kube-system-pod
+description: Detects pod creation in kube-system namespace - may indicate masquerading as system components
+severity: high
+nats_subject: samma.alerts.k8s.kube_system_pod
+
+compliance:
+  pci_dss:
+    - "10.2.2"
+    - "10.2.7"
+  nist_800_53:
+    - "AU.14"
+    - "CM.3"
+    - "SI.4"
+  mitre:
+    - "T1036"
+  tsc:
+    - "CC7.2"
+    - "CC8.1"
+  gpg13:
+    - "7.1"
+
+match:
+  and:
+    - field: kind
+      equals: Event
+    - field: objectRef.resource
+      equals: pods
+    - field: verb
+      equals: create
+    - field: objectRef.namespace
+      equals: kube-system

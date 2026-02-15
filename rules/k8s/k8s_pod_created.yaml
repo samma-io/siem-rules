@@ -1,0 +1,27 @@
+name: k8s-pod-created
+description: Detects new pod creation in the cluster via API server audit logs
+severity: low
+nats_subject: samma.alerts.k8s.pod_created
+
+compliance:
+  pci_dss:
+    - "10.2.7"
+  nist_800_53:
+    - "AU.12"
+    - "CM.3"
+  mitre:
+    - "T1610"
+  tsc:
+    - "CC7.2"
+    - "CC8.1"
+  gpg13:
+    - "7.1"
+
+match:
+  and:
+    - field: kind
+      equals: Event
+    - field: objectRef.resource
+      equals: pods
+    - field: verb
+      equals: create

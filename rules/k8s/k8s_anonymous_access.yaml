@@ -1,0 +1,33 @@
+name: k8s-anonymous-access
+description: Detects anonymous or unauthenticated API requests which may indicate misconfigured RBAC or unauthorized access
+severity: critical
+nats_subject: samma.alerts.k8s.anonymous_access
+
+compliance:
+  pci_dss:
+    - "10.2.5"
+    - "8.1.2"
+    - "7.1.2"
+  gdpr:
+    - "IV_35.7.d"
+  hipaa:
+    - "164.312.d"
+  nist_800_53:
+    - "AC.2"
+    - "IA.2"
+    - "AU.14"
+  mitre:
+    - "T1078"
+  tsc:
+    - "CC6.1"
+    - "CC6.8"
+  gpg13:
+    - "7.1"
+    - "7.2"
+
+match:
+  and:
+    - field: kind
+      equals: Event
+    - field: user.username
+      equals: "system:anonymous"

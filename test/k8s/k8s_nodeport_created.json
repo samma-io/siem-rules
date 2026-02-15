@@ -1,0 +1,39 @@
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "RequestResponse",
+  "auditID": "d4e5f6a7-b8c9-0123-defa-234567890123",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/services",
+  "verb": "create",
+  "user": {
+    "username": "developer@example.com",
+    "groups": ["system:authenticated"]
+  },
+  "sourceIPs": ["10.0.1.50"],
+  "objectRef": {
+    "resource": "services",
+    "namespace": "default",
+    "name": "my-nodeport-svc",
+    "apiVersion": "v1"
+  },
+  "requestObject": {
+    "kind": "Service",
+    "apiVersion": "v1",
+    "metadata": {
+      "name": "my-nodeport-svc",
+      "namespace": "default"
+    },
+    "spec": {
+      "type": "NodePort",
+      "ports": [{"port": 80, "targetPort": 8080, "nodePort": 30080}],
+      "selector": {"app": "my-app"}
+    }
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 201
+  },
+  "requestReceivedTimestamp": "2026-02-10T16:00:00.000000Z",
+  "stageTimestamp": "2026-02-10T16:00:00.100000Z"
+}

@@ -1,0 +1,26 @@
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "RequestResponse",
+  "auditID": "e7f8a9b0-c1d2-3456-efab-56789abcdef0",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/kube-system/configmaps/coredns",
+  "verb": "update",
+  "user": {
+    "username": "attacker@example.com",
+    "groups": ["system:authenticated"]
+  },
+  "sourceIPs": ["10.0.5.99"],
+  "objectRef": {
+    "resource": "configmaps",
+    "namespace": "kube-system",
+    "name": "coredns",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 200
+  },
+  "requestReceivedTimestamp": "2026-02-10T22:30:00.000000Z",
+  "stageTimestamp": "2026-02-10T22:30:00.100000Z"
+}

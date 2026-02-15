@@ -1,0 +1,30 @@
+name: k8s-pod-attach
+description: Detects attaching to a running container - indicates interactive access for lateral movement
+severity: high
+nats_subject: samma.alerts.k8s.pod_attach
+
+compliance:
+  pci_dss:
+    - "10.2.2"
+    - "10.2.5"
+  nist_800_53:
+    - "AU.14"
+    - "AC.17"
+  mitre:
+    - "T1609"
+  tsc:
+    - "CC6.1"
+    - "CC7.2"
+  gpg13:
+    - "7.1"
+
+match:
+  and:
+    - field: kind
+      equals: Event
+    - field: objectRef.resource
+      equals: pods
+    - field: objectRef.subresource
+      equals: attach
+    - field: verb
+      equals: create

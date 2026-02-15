@@ -1,0 +1,36 @@
+name: k8s-network-policy-changed
+description: Detects creation, modification, or deletion of network policies - may weaken network segmentation
+severity: high
+nats_subject: samma.alerts.k8s.network_policy_changed
+
+compliance:
+  pci_dss:
+    - "1.2.1"
+    - "10.2.7"
+  nist_800_53:
+    - "SC.7"
+    - "AC.4"
+    - "CM.3"
+  mitre:
+    - "T1562.001"
+  tsc:
+    - "CC6.1"
+    - "CC6.6"
+  gpg13:
+    - "7.1"
+
+match:
+  and:
+    - field: kind
+      equals: Event
+    - field: objectRef.resource
+      equals: networkpolicies
+    - or:
+        - field: verb
+          equals: create
+        - field: verb
+          equals: update
+        - field: verb
+          equals: patch
+        - field: verb
+          equals: delete

@@ -1,0 +1,43 @@
+name: k8s-privileged-pod
+description: Detects creation of pods with privileged security context or host namespace access - escape to host risk
+severity: critical
+nats_subject: samma.alerts.k8s.privileged_pod
+
+compliance:
+  pci_dss:
+    - "10.2.2"
+    - "2.2.1"
+  gdpr:
+    - "IV_35.7.d"
+  hipaa:
+    - "164.312.a"
+  nist_800_53:
+    - "AC.6"
+    - "CM.7"
+    - "AU.14"
+  mitre:
+    - "T1611"
+    - "T1610"
+  tsc:
+    - "CC6.1"
+    - "CC6.8"
+    - "CC7.2"
+  gpg13:
+    - "7.1"
+    - "7.2"
+
+match:
+  and:
+    - field: kind
+      equals: Event
+    - field: objectRef.resource
+      equals: pods
+    - field: verb
+      equals: create
+    - or:
+        - field: requestObject.spec.hostNetwork
+          equals: "true"
+        - field: requestObject.spec.hostPID
+          equals: "true"
+        - field: requestObject.spec.hostIPC
+          equals: "true"

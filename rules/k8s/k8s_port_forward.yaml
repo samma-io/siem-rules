@@ -1,0 +1,32 @@
+name: k8s-port-forward
+description: Detects port forwarding to pods - may indicate protocol tunneling or unauthorized access to internal services
+severity: high
+nats_subject: samma.alerts.k8s.port_forward
+
+compliance:
+  pci_dss:
+    - "10.2.5"
+    - "1.2.1"
+  nist_800_53:
+    - "AU.14"
+    - "SC.7"
+    - "AC.17"
+  mitre:
+    - "T1572"
+  tsc:
+    - "CC6.1"
+    - "CC6.6"
+    - "CC7.2"
+  gpg13:
+    - "7.1"
+
+match:
+  and:
+    - field: kind
+      equals: Event
+    - field: objectRef.resource
+      equals: pods
+    - field: objectRef.subresource
+      equals: portforward
+    - field: verb
+      equals: create

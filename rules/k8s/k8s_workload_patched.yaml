@@ -1,0 +1,34 @@
+name: k8s-workload-patched
+description: Detects patch operations on deployments, daemonsets, or statefulsets - may indicate sidecar injection or unauthorized modification
+severity: medium
+nats_subject: samma.alerts.k8s.workload_patched
+
+compliance:
+  pci_dss:
+    - "10.2.7"
+    - "11.5"
+  nist_800_53:
+    - "CM.3"
+    - "SI.4"
+    - "AU.12"
+  mitre:
+    - "T1610"
+  tsc:
+    - "CC7.2"
+    - "CC8.1"
+  gpg13:
+    - "7.1"
+
+match:
+  and:
+    - field: kind
+      equals: Event
+    - field: verb
+      equals: patch
+    - or:
+        - field: objectRef.resource
+          equals: deployments
+        - field: objectRef.resource
+          equals: daemonsets
+        - field: objectRef.resource
+          equals: statefulsets

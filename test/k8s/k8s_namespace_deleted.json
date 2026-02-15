@@ -1,0 +1,25 @@
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "e1f2a3b4-c5d6-7890-efab-901234567890",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/production",
+  "verb": "delete",
+  "user": {
+    "username": "admin@example.com",
+    "groups": ["system:masters", "system:authenticated"]
+  },
+  "sourceIPs": ["10.0.1.10"],
+  "objectRef": {
+    "resource": "namespaces",
+    "name": "production",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 200
+  },
+  "requestReceivedTimestamp": "2026-02-10T19:30:00.000000Z",
+  "stageTimestamp": "2026-02-10T19:30:00.100000Z"
+}

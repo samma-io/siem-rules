@@ -1,0 +1,32 @@
+name: k8s-nodeport-created
+description: Detects creation of NodePort services which expose cluster ports externally - potential unauthorized network exposure
+severity: high
+nats_subject: samma.alerts.k8s.nodeport_created
+
+compliance:
+  pci_dss:
+    - "1.2.1"
+    - "10.2.7"
+  nist_800_53:
+    - "SC.7"
+    - "CM.3"
+    - "AC.4"
+  mitre:
+    - "T1133"
+  tsc:
+    - "CC6.1"
+    - "CC6.6"
+    - "CC7.2"
+  gpg13:
+    - "7.1"
+
+match:
+  and:
+    - field: kind
+      equals: Event
+    - field: objectRef.resource
+      equals: services
+    - field: verb
+      equals: create
+    - field: requestObject.spec.type
+      equals: NodePort

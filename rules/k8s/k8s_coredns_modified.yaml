@@ -1,0 +1,37 @@
+name: k8s-coredns-modified
+description: Detects modifications to the CoreDNS configmap - may indicate DNS poisoning for lateral movement
+severity: critical
+nats_subject: samma.alerts.k8s.coredns_modified
+
+compliance:
+  pci_dss:
+    - "10.2.2"
+    - "1.2.1"
+  nist_800_53:
+    - "SC.20"
+    - "SC.21"
+    - "AU.14"
+  mitre:
+    - "T1557"
+  tsc:
+    - "CC6.1"
+    - "CC7.2"
+  gpg13:
+    - "7.1"
+    - "7.2"
+
+match:
+  and:
+    - field: kind
+      equals: Event
+    - field: objectRef.resource
+      equals: configmaps
+    - field: objectRef.name
+      equals: coredns
+    - field: objectRef.namespace
+      equals: kube-system
+    - or:
+        - field: verb
+          equals: update
+        - field: verb
+          equals: patch

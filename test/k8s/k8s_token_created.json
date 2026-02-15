@@ -1,0 +1,27 @@
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "a7b8c9d0-e1f2-3456-abcd-567890123456",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/serviceaccounts/my-service-account/token",
+  "verb": "create",
+  "user": {
+    "username": "developer@example.com",
+    "groups": ["system:authenticated"]
+  },
+  "sourceIPs": ["10.0.1.50"],
+  "objectRef": {
+    "resource": "serviceaccounts",
+    "subresource": "token",
+    "namespace": "default",
+    "name": "my-service-account",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 201
+  },
+  "requestReceivedTimestamp": "2026-02-10T17:30:00.000000Z",
+  "stageTimestamp": "2026-02-10T17:30:00.100000Z"
+}

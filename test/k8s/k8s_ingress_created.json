@@ -1,0 +1,27 @@
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "RequestResponse",
+  "auditID": "e5f6a7b8-c9d0-1234-efab-345678901234",
+  "stage": "ResponseComplete",
+  "requestURI": "/apis/networking.k8s.io/v1/namespaces/default/ingresses",
+  "verb": "create",
+  "user": {
+    "username": "developer@example.com",
+    "groups": ["system:authenticated"]
+  },
+  "sourceIPs": ["10.0.1.50"],
+  "objectRef": {
+    "resource": "ingresses",
+    "namespace": "default",
+    "name": "my-app-ingress",
+    "apiGroup": "networking.k8s.io",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 201
+  },
+  "requestReceivedTimestamp": "2026-02-10T16:30:00.000000Z",
+  "stageTimestamp": "2026-02-10T16:30:00.100000Z"
+}

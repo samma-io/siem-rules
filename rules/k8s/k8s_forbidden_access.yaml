@@ -1,0 +1,31 @@
+name: k8s-forbidden-access
+description: Detects 403 Forbidden responses from the API server - indicates RBAC probing or unauthorized access attempts
+severity: medium
+nats_subject: samma.alerts.k8s.forbidden_access
+
+compliance:
+  pci_dss:
+    - "10.2.4"
+    - "10.2.5"
+  gdpr:
+    - "IV_35.7.d"
+  hipaa:
+    - "164.312.b"
+  nist_800_53:
+    - "AC.7"
+    - "AU.14"
+    - "SI.4"
+  mitre:
+    - "T1613"
+  tsc:
+    - "CC6.1"
+    - "CC7.2"
+  gpg13:
+    - "7.1"
+
+match:
+  and:
+    - field: kind
+      equals: Event
+    - field: responseStatus.code
+      equals: "403"

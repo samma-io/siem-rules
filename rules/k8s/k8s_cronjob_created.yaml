@@ -1,0 +1,29 @@
+name: k8s-cronjob-created
+description: Detects creation of CronJob resources which can be used for persistence via scheduled execution
+severity: medium
+nats_subject: samma.alerts.k8s.cronjob_created
+
+compliance:
+  pci_dss:
+    - "10.2.7"
+    - "11.5"
+  nist_800_53:
+    - "AU.12"
+    - "CM.3"
+    - "SI.4"
+  mitre:
+    - "T1053.007"
+  tsc:
+    - "CC7.2"
+    - "CC8.1"
+  gpg13:
+    - "7.1"
+
+match:
+  and:
+    - field: kind
+      equals: Event
+    - field: objectRef.resource
+      equals: cronjobs
+    - field: verb
+      equals: create

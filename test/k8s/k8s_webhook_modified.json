@@ -1,0 +1,26 @@
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "RequestResponse",
+  "auditID": "d6e7f8a9-b0c1-2345-defa-456789abcdef",
+  "stage": "ResponseComplete",
+  "requestURI": "/apis/admissionregistration.k8s.io/v1/mutatingwebhookconfigurations",
+  "verb": "create",
+  "user": {
+    "username": "admin@example.com",
+    "groups": ["system:masters", "system:authenticated"]
+  },
+  "sourceIPs": ["10.0.1.10"],
+  "objectRef": {
+    "resource": "mutatingwebhookconfigurations",
+    "name": "backdoor-webhook",
+    "apiGroup": "admissionregistration.k8s.io",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 201
+  },
+  "requestReceivedTimestamp": "2026-02-10T22:00:00.000000Z",
+  "stageTimestamp": "2026-02-10T22:00:00.100000Z"
+}
