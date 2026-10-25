@@ -34,8 +34,11 @@ jobs:
         id: version
         run: echo "VERSION=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
 
+      # The tag name reaches the shell through env, never through ${{ }}.
       - name: Package rules
-        run: tar -czf "siem-rules-${{ steps.version.outputs.VERSION }}.tar.gz" rules/
+        env:
+          VERSION: ${{ steps.version.outputs.VERSION }}
+        run: tar -czf "siem-rules-${VERSION}.tar.gz" rules/
 
       - name: Create release
         uses: softprops/action-gh-release@v2
