@@ -1,5 +1,26 @@
 # Samma SIEM Rules
 
+> [!WARNING]
+> **This repo is frozen.** The rules now live in
+> [samma-io/detection-engine](https://github.com/samma-io/detection-engine) as
+> Sigma rules, each with a `.tests.yml`:
+>
+> - [`rules/k8s`](https://github.com/samma-io/detection-engine/tree/main/rules/k8s):
+>   all 27 Kubernetes audit rules from `rules/k8s/` here.
+> - [`rules/scanner`](https://github.com/samma-io/detection-engine/tree/main/rules/scanner):
+>   the nmap and nikto rules from `rules/nmap/` and `rules/nikto/` here.
+>
+> The custom YAML engine these rules were written for (samma-io/siem) is
+> deprecated in favour of `chart/samma-siem` plus detection-engine; see
+> [samma-io/siem#4](https://github.com/samma-io/siem/issues/4). Do not add or
+> change rules here. Open them in detection-engine instead. This repo will be
+> archived after a release with the new stack.
+>
+> The production deploy workflow (`.github/workflows/deploy.yml`) has been
+> removed. Nothing in this repo deploys anywhere any more.
+
+The rest of this README describes the legacy rule format and is kept for reference.
+
 A collection of SIEM detection rules for the [Samma](https://samma.io) security platform. Rules are defined in YAML and match against security events from various sources including Kubernetes audit logs, Nmap scans, and Nikto web vulnerability scans.
 
 ## Project Structure
@@ -14,7 +35,7 @@ siem-rules/
 │   ├── k8s/
 │   ├── nmap/
 │   └── nikto/
-└── .github/workflows # CI and release automation
+└── .github/workflows # rule validation (test) and release archives only
 ```
 
 ## Rule Format
@@ -90,7 +111,9 @@ pip install pyyaml
 python test_rules.py
 ```
 
-## Adding a New Rule
+## Adding a New Rule (legacy, do not use)
+
+New rules go in samma-io/detection-engine. The steps below are the legacy process.
 
 1. Create a YAML rule file under `rules/<category>/`:
    ```yaml
