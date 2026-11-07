@@ -21,13 +21,17 @@ def resolve_field(data, field_path):
 
 
 def check_condition(event, condition):
-    """Check a single match condition against an event."""
+    """Check a match condition, or a nested and/or block, against an event."""
+    if "and" in condition or "or" in condition:
+        return evaluate_match(event, condition)
+
     field = condition["field"]
     value = resolve_field(event, field)
     if value is None:
         return False
 
-    value = str(value)
+    # The engine compares JSON booleans as "true" and "false"; str() gives "True".
+    value = str(value).lower() if isinstance(value, bool) else str(value)
 
     if "equals" in condition:
         return value == str(condition["equals"])
